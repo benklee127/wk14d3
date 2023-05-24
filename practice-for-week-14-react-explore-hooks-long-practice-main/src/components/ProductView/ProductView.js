@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react'
 import ProductListItem from "../ProductListItem";
 import ProductDetails from "../ProductDetails";
 import './ProductView.css'
@@ -6,7 +7,10 @@ import './ProductView.css'
 function ProductView({ products }) {
 
   // TODO: Replace with state variable
-  const sideOpen = true;
+  const [sideOpen, setSideOpen] = useState(true);
+  const [selectedProduct, setSelectedProduct] = useState(null)
+
+
 
   return (
     <div className="product-view">
@@ -17,7 +21,8 @@ function ProductView({ products }) {
             <ProductListItem
               key={item.id}
               product={item}
-              onClick={() => console.log('SELECT PRODUCT', item)}
+              isSelected={selectedProduct}
+              onClick={() => setSelectedProduct(item)}
             />
           )}
         </div>
@@ -25,7 +30,7 @@ function ProductView({ products }) {
       <div className="product-side-panel">
         <div className="product-side-panel-toggle-wrapper">
           <div className="product-side-panel-toggle"
-               onClick={() => console.log('TOGGLE SIDE PANEL')}>
+            onClick={() => setSideOpen(!sideOpen)}>
             {sideOpen ? '>' : '<'}
           </div>
         </div>
