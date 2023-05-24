@@ -3,7 +3,7 @@ import React from 'react'
 function ProductListItem({ product, isSelected, onClick }) {
   console.log('Product', product);
   console.log('');
-
+  console.log('2')
   return (
     <div className={`product-list-item ${isSelected ? ' selected' : ''}`}>
       <img className="product-list-item-photo"

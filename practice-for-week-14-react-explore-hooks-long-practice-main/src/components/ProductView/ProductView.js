@@ -3,15 +3,26 @@ import { useState } from 'react'
 import ProductListItem from "../ProductListItem";
 import ProductDetails from "../ProductDetails";
 import './ProductView.css'
-
+import { useEffect } from 'react';
 function ProductView({ products }) {
 
   // TODO: Replace with state variable
   const [sideOpen, setSideOpen] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState(null)
+  
+  useEffect(() => {
+    console.log(`selectedProduct CHANGED TO`, selectedProduct);
+    if (selectedProduct)
+    setSideOpen(true);
+  }, [selectedProduct]);
+  
+  useEffect(() => {
+    console.log(`selectedProduct CHANGED TO`, sideOpen);
+    if(!sideOpen)
+    setSelectedProduct();
+  }, [sideOpen]);
 
-
-
+console.log('1')
   return (
     <div className="product-view">
       <div className="product-main-area">
@@ -34,7 +45,7 @@ function ProductView({ products }) {
             {sideOpen ? '>' : '<'}
           </div>
         </div>
-        <ProductDetails visible={sideOpen} />
+        <ProductDetails product={selectedProduct} visible={sideOpen} />
       </div>
     </div>
   );
